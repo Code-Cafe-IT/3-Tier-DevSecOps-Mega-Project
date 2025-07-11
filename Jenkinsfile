@@ -86,7 +86,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-token') {
-                        dir('api') {
+                        dir('client') {
                             def dockerImage = docker.build("${DOCKERHUB_USERNAME}/${IMAGE_NAME_FRONTEND}:${env.BUILD_NUMBER}")
                             echo "Pushing image ${dockerImage.id} to Docker Hub..."
                             dockerImage.push()
