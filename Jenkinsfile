@@ -62,6 +62,7 @@ pipeline {
         stage('Trivy FS Scan'){
             steps{
                 sh 'trivy fs . --format table -o fs-report.html'
+                sh 'whoami'
             }
         }
         stage('Build-Tag & Push Backend Docker Image'){
