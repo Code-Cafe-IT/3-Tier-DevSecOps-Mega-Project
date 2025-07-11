@@ -76,7 +76,8 @@ pipeline {
                             echo "Tagging image as 'latest' and pushing..."
                             dockerImage.tag('latest')
                             dockerImage.push('latest')
-                            sh 'trivy image --format table -o frontend-image-report.html ${DOCKERHUB_USERNAME}/${IMAGE_NAME_BACKEND}:${env.BUILD_NUMBER}'
+                            def imageTag = "${DOCKERHUB_USERNAME}/${IMAGE_NAME_BACKEND}:${env.BUILD_NUMBER}"
+                            sh "trivy image --format table -o frontend-image-report.html ${imageTag}"
                         }
                     }
                 }
@@ -93,7 +94,8 @@ pipeline {
                             echo "Tagging image as 'latest' and pushing..."
                             dockerImage.tag('latest')
                             dockerImage.push('latest')
-                            sh 'trivy image --format table -o frontend-image-report.html ${DOCKERHUB_USERNAME}/${IMAGE_NAME_FRONTEND}:${env.BUILD_NUMBER}'
+                            def imageTag = "${DOCKERHUB_USERNAME}/${IMAGE_NAME_BACKEND}:${env.BUILD_NUMBER}"
+                            sh "trivy image --format table -o frontend-image-report.html ${imageTag}"
                         }
                     }
                 }
