@@ -70,7 +70,7 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'docker-token') {
                         dir('api') {
-                            def dockerImage = docker.image("${DOCKERHUB_USERNAME}/${IMAGE_NAME_BACKEND}:${env.BUILD_NUMBER}")
+                            def dockerImage = docker.build("${DOCKERHUB_USERNAME}/${IMAGE_NAME_BACKEND}:${env.BUILD_NUMBER}")
                             echo "Pushing image ${dockerImage.id} to Docker Hub..."
                             dockerImage.push()
                             echo "Tagging image as 'latest' and pushing..."
@@ -87,7 +87,7 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'docker-token') {
                         dir('api') {
-                            def dockerImage = docker.image("${DOCKERHUB_USERNAME}/${IMAGE_NAME_FRONTEND}:${env.BUILD_NUMBER}")
+                            def dockerImage = docker.build("${DOCKERHUB_USERNAME}/${IMAGE_NAME_FRONTEND}:${env.BUILD_NUMBER}")
                             echo "Pushing image ${dockerImage.id} to Docker Hub..."
                             dockerImage.push()
                             echo "Tagging image as 'latest' and pushing..."
